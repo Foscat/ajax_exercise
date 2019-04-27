@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <title>Using Ajax</title>
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <!-- Custom css -->
+        <link rel="stylesheet" href="./style.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>Call buttons</h3>
+                        </div>
+                        <div class="card-body">
+                            <button type="button" class="btn" id="getAll">Get All Posts</button>
+                            <button type="button" class="btn" id="get12com">Get comments for post 12</button>
+                            <button type="button" class="btn" id="get2">Get posts for 2</button>
+                            <button type="button" class="btn" id="poster">Post Route</button>
+                            <button type="button" class="btn" id="replacePost">Replace Post</button>
+                            <button type="button" class="btn" id="deletePosts">Delete Post</button>
+                        </div>
+
+                        <div class="col" id="apiDump">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6"></div>
+                
+            </div>
+        </div>
+
+        
+    </body>
+
+    <footer>
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.4.0.js"
+        integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+        crossorigin="anonymous"></script>
+
+        <!-- Custom js-->
+        <script src="./ajax.js"></script>
+    </footer>
+
+</html>
