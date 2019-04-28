@@ -7,12 +7,37 @@ $("#getAll").on("click", function(){
         method: "GET"
     }).then(function(res) {
         $("#apiDump").empty();
-        console.log(res);
-        // 2) Get post with id of 10
+        for(var i=0; i < res.length; i++){
+            // console.log(res[i]);
+            var div = $("<div class='border border-dark m-1 p-1'>")
+            var h = $("<h3 class='border-bottom border-danger'>").text("ID: " + res[i].id + "\n Title: "+res[i].title);
+            var p = $("<p>").text("Body: " + res[i].body);
+
+            $(div).append(h,p);
+
+            $("#apiDump").append(div);
+        }
         console.log(res[9]);
 
     });
 });
+
+$("#get10post").on("click", function(){
+    $.ajax({
+        url: "http://jsonplaceholder.typicode.com/posts/10",
+        method: "GET"
+    }).then(function(res) {
+        $("#apiDump").empty();
+
+        div = $("<div class='border border-dark m-1 p-1'>")
+        h = $("<h3 class='border-bottom border-danger'>").text("ID: " + res.id + "\n Title: "+res.title);
+        p = $("<p>").text("Body: " + res.body);
+
+        $(div).append(h,p);
+        $("#apiDump").append(div);
+
+    });
+})
 
 
 // 3) Get the comments from post with id of 12
@@ -22,7 +47,17 @@ $("#get12com").on("click", function api(){
         method: "GET"
     }).then(function(res){
         $("#apiDump").empty();
-        console.log(res)
+        for(var i=0; i < res.length; i++){
+            // console.log(res[i]);
+            div = $("<div class='border border-dark m-1 p-1'>")
+            h = $("<h3 class='border-bottom border-danger'>").text("ID: " + res[i].id + "\n Title: "+res[i].name);
+            var h2 = $("<h4>").text("Post Id: " + res[i].postId);
+            p = $("<p>").text("Body: " + res[i].body);
+
+            $(div).append(h, h2,p);
+
+            $("#apiDump").append(div);
+        }
     })
 });
 
@@ -33,12 +68,22 @@ $("#get2").on("click", function api(){
         method: "GET"
     }).then(function(res){
         $("#apiDump").empty();
-        console.log(res)
+        console.log(res);
+        for(var i=0; i < res.length; i++){
+            // console.log(res[i]);
+            var div = $("<div class='border border-dark m-1 p-1'>")
+            var h = $("<h3 class='border-bottom border-danger'>").text("ID: " + res[i].id + "\n Title: "+res[i].title);
+            var p = $("<p>").text("Body: " + res[i].body);
+
+            $(div).append(h,p);
+
+            $("#apiDump").append(div);
+        }
     })
 });
 
 // 5) Create a new post and log the id generated for it by the server
-var data = {userId: 69, title: "CEO of K-Fizzle Enterprises", body: "It aint easy bein cheesy."}
+var data = { title: "CEO of K-Fizzle Enterprises", body: "It aint easy bein cheesy."}
 $("#poster").on("click", function api(){
     $.ajax({
         url:"http://jsonplaceholder.typicode.com/posts",
@@ -49,6 +94,12 @@ $("#poster").on("click", function api(){
     }).then(function(res){
         $("#apiDump").empty();
         console.log(res.id)
+        div = $("<div class='border border-dark m-1 p-1'>")
+        h = $("<h3 class='border-bottom border-danger'>").text("Computer generated id: " + res.id + "\n Title: "+res.title);
+        p = $("<p>").text("Body: " + res.body);
+
+        $(div).append(h,p);
+        $("#apiDump").append(div);
     })
     // Test to see of i can get my post back as a get. **TLDR It doesnt come back as anything
     // .then(function(res){
@@ -65,29 +116,23 @@ $("#poster").on("click", function api(){
 // Replace the post with id of 12 and render the responseJSON
 $("#replacePost").on("click", function(){
     // One api call to see what is there originally
+    // 7) Update the title field of the post with id of 12
     $.ajax({
-        url: "http://jsonplaceholder.typicode.com/posts/12",
-        method: "GET"
-    }).then(function(res){
-        console.log("First response", res);
-
-        // Second api cal that posts to you can see what is now there
-        $.ajax({
-            url: "http://jsonplaceholder.typicode.com/posts/12",
-            method: "PUT",
-            data: data
-        }).then(function(res){
+        method: 'PATCH',
+        url: 'http://jsonplaceholder.typicode.com/posts/12',
+        data: {
+    title: "patched it"
+    },
+        complete: function(res){
             $("#apiDump").empty();
-            console.log(res);
-            var Div = $("<div>");
-            var title = res.title;
-            var body = res.body;
-            var h1 = $("<h1>").text("Respective Title: " + title);
-            var p = $("<p>").text(body);
-            $(Div).append(h1, p);
-            $("#apiDump").append(Div);
-        })
+            console.log(res.responseJSON);
+            div = $("<div class='border border-dark m-1 p-1'>")
+            h = $("<h3 class='border-bottom border-danger'>").text("ID: " + res.responseJSON.id + "\n Title: "+res.responseJSON.title);
+            p = $("<p>").text("Body: " + res.responseJSON.body);
 
+            $(div).append(h,p);
+            $("#apiDump").append(div);
+        }
     })
 });
 
@@ -99,7 +144,7 @@ $("#deletePosts").on("click", function(){
     }).then(function(res){
         console.log(res);
         $("#apiDump").empty();
-        $("#apiDump").append("You deleted it!!!!")
+        $("#apiDump").append("<div class='jumbotron bg-info'><h1>You deleted it!!!!</h1></div>")
     })
 });
 
