@@ -1,3 +1,4 @@
+// Exercise 1 using ajax;
 
 // 1) Get all posts
 $("#getAll").on("click", function(){
@@ -121,7 +122,7 @@ $("#replacePost").on("click", function(){
         method: 'PATCH',
         url: 'http://jsonplaceholder.typicode.com/posts/12',
         data: {
-    title: "patched it"
+        title: "patched it"
     },
         complete: function(res){
             $("#apiDump").empty();
