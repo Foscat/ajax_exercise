@@ -4,7 +4,7 @@
 $("#getAll").on("click", function(){
     console.log("clicked");
     $.ajax({
-        url: "http://jsonplaceholder.typicode.com/posts",
+        url: "https://jsonplaceholder.typicode.com/posts",
         method: "GET"
     }).then(function(res) {
         $("#apiDump").empty();
@@ -25,7 +25,7 @@ $("#getAll").on("click", function(){
 
 $("#get10post").on("click", function(){
     $.ajax({
-        url: "http://jsonplaceholder.typicode.com/posts/10",
+        url: "https://jsonplaceholder.typicode.com/posts/10",
         method: "GET"
     }).then(function(res) {
         $("#apiDump").empty();
@@ -44,7 +44,7 @@ $("#get10post").on("click", function(){
 // 3) Get the comments from post with id of 12
 $("#get12com").on("click", function api(){
     $.ajax({
-        url:"http://jsonplaceholder.typicode.com/comments/?postId=12",
+        url:"https://jsonplaceholder.typicode.com/comments/?postId=12",
         method: "GET"
     }).then(function(res){
         console.log(res)
@@ -66,7 +66,7 @@ $("#get12com").on("click", function api(){
 // 4) Get all the posts from user with id of 2
 $("#get2").on("click", function api(){
     $.ajax({
-        url:"http://jsonplaceholder.typicode.com/posts?userId=2",
+        url:"https://jsonplaceholder.typicode.com/posts?userId=2",
         method: "GET"
     }).then(function(res){
         $("#apiDump").empty();
@@ -88,7 +88,7 @@ $("#get2").on("click", function api(){
 var data = { title: "CEO of K-Fizzle Enterprises", body: "It aint easy bein cheesy."}
 $("#poster").on("click", function api(){
     $.ajax({
-        url:"http://jsonplaceholder.typicode.com/posts",
+        url:"https://jsonplaceholder.typicode.com/posts",
         method: "POST",
         data: data,
         success: true,
@@ -121,7 +121,7 @@ $("#replacePost").on("click", function(){
     // 7) Update the title field of the post with id of 12
     $.ajax({
         method: 'PATCH',
-        url: 'http://jsonplaceholder.typicode.com/posts/12',
+        url: 'https://jsonplaceholder.typicode.com/posts/12',
         data: {
         title: "patched it"
     },
@@ -142,7 +142,7 @@ $("#replacePost").on("click", function(){
 // Delete the post with id of 12 and render a success message
 $("#deletePosts").on("click", function(){
     $.ajax({
-        url: "http://jsonplaceholder.typicode.com/posts/12",
+        url: "https://jsonplaceholder.typicode.com/posts/12",
         method: "DELETE"
     }).then(function(res){
         console.log(res);
@@ -158,7 +158,7 @@ $(document).on("click", ".makeList", function(){
     $("#apiDump").empty();
     // One api call to see what is there originally
     $.ajax({
-        url: "http://jsonplaceholder.typicode.com/posts",
+        url: "https://jsonplaceholder.typicode.com/posts",
         method: "GET"
     }).then(function(res){
         for(var i=0; i < res.length; i++){
@@ -197,7 +197,7 @@ $(document).on("click", ".link", function(){
             $(Div).append(h1, p);
             $("#apiDump").append(Div);
         }
-        backButton =('<button class="makeList btn btn-primary" data-link="http://jsonplaceholder.typicode.com/posts">See all posts</button>');
+        backButton =('<button class="makeList btn btn-primary" data-link="https://jsonplaceholder.typicode.com/posts">See all posts</button>');
         $("#apiDump").prepend(backButton);
 
     })

@@ -33,7 +33,7 @@ $(document).on("submit", "form", function(event){
     console.log(name);
 
     $.ajax({
-        url: "http://jsonplaceholder.typicode.com/users/" + name,
+        url: "hsttp://jsonplaceholder.typicode.com/users/" + name,
         method: "GET"
 
     }).then((res) => {
@@ -44,8 +44,8 @@ $(document).on("submit", "form", function(event){
         var email = $("<h5>").text("Your primary email is: " + res.email);
         var phone = $("<h5>").text("Your primary phone number is: " + res.phone);
         var website = $("<a href=" + res.website + ">Link to website</a>");
-        var albumsLink = $("<button class='m-2 albumLink' type='button' data-link='http://jsonplaceholder.typicode.com/users/" + res.id + "/albums/?userId=" + res.id + "'>").text("albums");
-        var postTitleLink = $("<button class='m-2 titleLink' type='button' data-link='http://jsonplaceholder.typicode.com/users/" + res.id + "/posts/?userId=" + res.id + "'>").text("titles")
+        var albumsLink = $("<button class='m-2 albumLink' type='button' data-link='https://jsonplaceholder.typicode.com/users/" + res.id + "/albums/?userId=" + res.id + "'>").text("albums");
+        var postTitleLink = $("<button class='m-2 titleLink' type='button' data-link='https://jsonplaceholder.typicode.com/users/" + res.id + "/posts/?userId=" + res.id + "'>").text("titles")
         $(div).append(welcome, email, phone, website,albumsLink, postTitleLink);
         $("#signedIn").append(div);
 
@@ -101,6 +101,7 @@ $(document).on("click", ".titleLink", function(){
     
 })
 
+// sign out of a profile
 $(document).on("click", "#signOut_Btn", function(){
     $("#signedIn").empty();
     $("#apiDump").empty();
