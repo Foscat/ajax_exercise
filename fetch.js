@@ -32,24 +32,21 @@ $(document).on("submit", "form", function(event){
     if(name === "Moriah.Stanton"){name = 10}
     console.log(name);
 
-    $.ajax({
-        url: "hsttp://jsonplaceholder.typicode.com/users/" + name,
-        method: "GET"
+    fetch("https://jsonplaceholder.typicode.com/users/"+ name)
+        .then((res) => res.json())
+        .then((data) => {
+        console.log(data);
 
-    }).then((res) => {
-        console.log(res);
-
-        var div = $("<div class='border p-3 border-dark'>")
-        var welcome = $("<h3>").text("Welcome back! " + res.name);
-        var email = $("<h5>").text("Your primary email is: " + res.email);
-        var phone = $("<h5>").text("Your primary phone number is: " + res.phone);
-        var website = $("<a href=" + res.website + ">Link to website</a>");
-        var albumsLink = $("<button class='m-2 albumLink' type='button' data-link='https://jsonplaceholder.typicode.com/users/" + res.id + "/albums/?userId=" + res.id + "'>").text("albums");
-        var postTitleLink = $("<button class='m-2 titleLink' type='button' data-link='https://jsonplaceholder.typicode.com/users/" + res.id + "/posts/?userId=" + res.id + "'>").text("titles")
-        $(div).append(welcome, email, phone, website,albumsLink, postTitleLink);
-        $("#signedIn").append(div);
-
-    }).catch((err) => {
+            var div = $("<div class='border p-3 border-dark'>")
+            var welcome = $("<h3>").text("Welcome back! " + data.name);
+            var email = $("<h5>").text("Your primary email is: " + data.email);
+            var phone = $("<h5>").text("Your primary phone number is: " + data.phone);
+            var website = $("<a href=" + data.website + ">Link to website</a>");
+            var albumsLink = $("<button class='m-2 albumLink' type='button' data-link='https://jsonplaceholder.typicode.com/users/" + data.id + "/albums/?userId=" + data.id + "'>").text("albums");
+            var postTitleLink = $("<button class='m-2 titleLink' type='button' data-link='https://jsonplaceholder.typicode.com/users/" + data.id + "/posts/?userId=" + data.id + "'>").text("titles")
+            $(div).append(welcome, email, phone, website,albumsLink, postTitleLink);
+            $("#signedIn").append(div);
+        }).catch((err) => {
         console.error(err);
         $("#signOut_Btn").hide();
         alert("Your input did not match any usernames!!! \n Try again.");
@@ -61,16 +58,15 @@ $(document).on("submit", "form", function(event){
 $(document).on("click", ".albumLink", function(){
     var link = $(this).data("link");
     console.log(link);
-    $.ajax({
-        url: link,
-        method: "GET"
-    }).then(function(res){
-        console.log(res);
+    fetch(link)
+        .then((res) => res.json())
+        .then((data) => {
+        console.log(data);
         $("#apiDump").empty();
 
-        for(var i=0; i < res.length; i++){
+        for(var i=0; i < data.length; i++){
             div = $("<div>");
-            var h = $("<h4>").text("Album title: " + res[i].title);
+            var h = $("<h4>").text("Album title: " + data[i].title);
             $(div).append(h);
             $("#apiDump").append(div);
         }
@@ -83,16 +79,15 @@ $(document).on("click", ".albumLink", function(){
 $(document).on("click", ".titleLink", function(){
     link = $(this).data("link");
     console.log(link);
-    $.ajax({
-        url: link,
-        method: "GET"
-    }).then(function(res){
-        console.log(res);
+    fetch("https://jsonplaceholder.typicode.com/posts")
+        .then((res) => res.json())
+        .then((data) => {
+        console.log(data);
         $("#apiDump").empty();
 
-        for(var i=0; i < res.length; i++){
+        for(var i=0; i < data.length; i++){
             div = $("<div>");
-            var h = $("<h4>").text("Album title: " + res[i].title);
+            var h = $("<h4>").text("Album title: " + data[i].title);
             $(div).append(h);
             $("#apiDump").append(div);
         }
